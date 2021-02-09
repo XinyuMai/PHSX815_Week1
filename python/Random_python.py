@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-
 # imports of external packages to use in our code
 import sys
 import numpy as np
@@ -71,19 +70,18 @@ if __name__ == "__main__":
     # an array of random numbers from numpy
     x = np.random.rand(N)
 
+################################################################
+    # open a file for writing and assign it to random numbers
+    random_numbers = open('random_numbers.txt', 'w')
+
     # an array of random numbers using our Random class
-    myx = []
-    for i in range(0,N):
-        myx.append(random.rand())
+    try:
+        for i in range(0,N):
+            line = str(random.rand())
+            random_numbers.write(line)
+            random_numbers.write("\n")
+            #print(line)
+    except ValueError:
+        print("Invalid input")
 
-    # create histogram of our data
-    n, bins, patches = plt.hist(myx, 50, density=True, facecolor='g', alpha=0.75)
-
-    # plot formating options
-    plt.xlabel('x')
-    plt.ylabel('Probability')
-    plt.title('Uniform random number')
-    plt.grid(True)
-
-    # show figure (program only ends once closed
-    plt.show()
+    random_numbers.close()
